@@ -17,17 +17,17 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh '''
+                sh """
                 curl -u admin:admin123 \
-                -T target/demo.war \
-                "http://<TOMCAT_IP>:8080/manager/text/deploy?path=/demo&update=true"
-                '''
+                -T target/tiny-ci-cd-demo-1.0.war \
+                "http://3.110.106.39:8080/manager/text/deploy?path=/demo&update=true"
+                """
             }
         }
 
         stage('Verify') {
             steps {
-                sh 'curl http://<TOMCAT_IP>:8080/demo/'
+                sh 'curl -f http://3.110.106.39:8080/demo/'
             }
         }
     }
